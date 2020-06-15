@@ -28,13 +28,17 @@ const getData = () => ({ test: "plz render" });
 
 const Inner = () => {
   const test = useTestContext();
-  const { data } = useQuery(test && ["test"], getData);
+
+  const queryKey = [test && "test"].filter(Boolean);
+  const { data } = useQuery(queryKey, getData);
 
   return data ? <div>{data.test}</div> : null;
 };
 
 const queryConfig = {
-  suspense: true
+  shared: {
+    suspense: true
+  }
 };
 
 const Test = () => (
