@@ -29,6 +29,14 @@ export function useBaseQuery(queryKey, queryFn, config = {}) {
   const instanceRef = React.useRef()
 
   // Subscribe to the query when the subscribe function changes
+  // query.suspenseInstance = {
+  //   onStateUpdate: () => rerender({}),
+  //   onSuccess: data => getLatestConfig().onSuccess(data),
+  //   onError: err => getLatestConfig().onError(err),
+  //   onSettled: (data, err) => getLatestConfig().onSettled(data, err),
+  // }
+
+  // After mount, subscribe to the query
   React.useEffect(() => {
     instanceRef.current = query.subscribe(() => rerender({}))
 
